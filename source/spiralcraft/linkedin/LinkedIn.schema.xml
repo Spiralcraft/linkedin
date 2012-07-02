@@ -1,0 +1,15 @@
+<meta:Schema
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:li="class:/spiralcraft/linkedin/"
+  >
+  <name>spiralcraft-linkedin
+  </name>
+  <entities>
+    
+    <meta:Entity>
+      <type><li:Login.type/>
+      </type>
+    </meta:Entity>
+          
+  </entities>
+</meta:Schema>

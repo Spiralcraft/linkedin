@@ -1,0 +1,10 @@
+out
+test-out
+build.number
+*.class
+bin
+*.local
+package-stage
+lib
+war
+packages

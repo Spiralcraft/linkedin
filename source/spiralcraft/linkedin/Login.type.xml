@@ -1,0 +1,11 @@
+<meta:Type
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:sec="class:/spiralcraft/security/"
+  xmlns:oauth="class:/spiralcraft/oauth1/"
+  >
+
+  <baseType>
+    <oauth:Login.type/>
+  </baseType>
+  
+</meta:Type>

@@ -1,0 +1,28 @@
+<project name="spiralcraft-oauth-test" basedir="." default="test">
+
+  <import file="../build.xml"/>
+  
+  <target name="test">
+ 
+    <devtask
+      codebase=".."
+      exec
+        ="class:/spiralcraft/task/TaskRunner Test
+         "
+    />
+  </target>
+
+  <target name="httpd" description="test web app">
+     
+    <devgui
+      codebase=".."
+      launchArgs="--gui"
+      exec
+        ="--context .. 
+          --config context://run/config
+          config/HttpDaemon
+         "
+    />
+  </target>    
+                
+</project>

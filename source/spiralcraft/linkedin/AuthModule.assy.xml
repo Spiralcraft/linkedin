@@ -1,0 +1,54 @@
+<secspi:DataAuthModule
+  xmlns:secspi="class:/spiralcraft/security/spi/"
+  xmlns:secauth="class:/spiralcraft/security/auth/"
+  xmlns:query="class:/spiralcraft/data/query/"
+  xmlns:li="class:/spiralcraft/linkedin/"
+  xmlns:dtask="class:/spiralcraft/data/task/"
+  xmlns:dsession="class:/spiralcraft/data/session/"
+  >
+  <name>linkedin
+  </name>        
+  
+  <refreshTriggerX>[li:Session].oauthId
+  </refreshTriggerX>
+  
+  <accountQuery x="
+    [*query:Projection
+      {
+        [*query:Selection
+          { [@li:Login].type
+          , `.oauthId==[li:Session].oauthId`
+          }
+        ]
+        ,`.login`
+      }
+    ]"
+  />
+    
+  <onAssociate>
+    [li:Session].oauthId!=null
+    ?
+      [*dtask:Fetch
+        { [*query:Selection
+            { [@li:Login].type
+            , `.oauthId==[li:Session].oauthId`
+            }
+          ]
+        }
+      ].()
+      .@top
+      .[*dtask:Edit{ autoCreate:=true }].()
+      {.oauthId=[li:Session].oauthId
+      ,.principalId=[secauth:AuthSession].accountId
+      ,.
+      }
+      .@tuple.save()
+    :null
+    
+  </onAssociate>
+  
+  <beforeLogout>
+    [li:Filter].logout()
+  </beforeLogout>
+                      
+</secspi:DataAuthModule>

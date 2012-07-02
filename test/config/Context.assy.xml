@@ -1,0 +1,20 @@
+<base:Context
+  xmlns:httpd="class:/spiralcraft/pioneer/httpd/"
+  xmlns:base="context://package-base/"
+  >
+                  
+  <initParameters>    
+    <httpd:InitParameter>
+      <name>spiralcraft.instance.configURI
+      </name>
+      <value>context://run/config/
+      </value>
+    </httpd:InitParameter>
+    <httpd:InitParameter>
+      <name>spiralcraft.instance.dataURI
+      </name>
+      <value>context://run/data/
+      </value>
+    </httpd:InitParameter>
+  </initParameters>
+</base:Context>

@@ -1,0 +1,11 @@
+<app:PluginContext
+  xmlns:app="class:/spiralcraft/app/"
+  >
+  <pluginId>spiralcraft-linkedin
+  </pluginId>
+  
+  <stores>
+    <Store/>
+  </stores>
+
+</app:PluginContext>

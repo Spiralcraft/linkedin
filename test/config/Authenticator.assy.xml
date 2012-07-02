@@ -1,0 +1,9 @@
+<base:Authenticator
+  xmlns:base="context://package-base/"
+  xmlns:li="class:/spiralcraft/linkedin/"
+  >
+  
+  <authModules>
+    <li:AuthModule/>
+  </authModules>
+</base:Authenticator>

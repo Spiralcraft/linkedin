@@ -1,0 +1,31 @@
+<scm:Change.list
+  xmlns:scm="class:/spiralcraft/scm/meta/"
+  >
+  <scm:Change>
+  
+    <revision>0.4.17
+    </revision>
+    
+    <authorId>miketoth
+    </authorId>
+    
+    <date>
+    </date>
+    
+    <detail>
+    
+      <scm:Change>
+        <revision>-dev1
+        </revision>
+        
+        <notes>
+          <scm:Note>Initial commit
+          </scm:Note>
+        </notes>
+
+      </scm:Change>
+
+    </detail>
+  </scm:Change>
+  
+</scm:Change.list>

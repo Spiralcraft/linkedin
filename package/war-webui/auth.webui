@@ -1,0 +1,25 @@
+<%@doclet
+  tgns="class:/spiralcraft/servlet/webui/components/"
+  tgns:wui="class:/spiralcraft/servlet/webui/"
+  tgns:li="class:/spiralcraft/linkedin/"
+  tgns:jnet="class:/java/net/"
+  %>
+  <%If x='[wui:ServiceContext].query
+            {.get("oauth_token")==null
+             || .get("oauth_verifier")==null
+            }
+          '
+    %>
+    <%Redirect
+      debug="true"
+      locationX
+        ='[li:Filter].startAuthSequence
+            ([wui:ServiceContext].request.requestURL.toString())
+         '
+    /%>
+  <%Else/%>
+    <%Redirect
+      locationX="[li:Filter].readCallback([wui:ServiceContext].query)"
+    /%>
+  <%/If%>
+<%/@doclet%>

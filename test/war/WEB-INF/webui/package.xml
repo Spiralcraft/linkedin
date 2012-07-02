@@ -1,0 +1,9 @@
+<vfs:Package
+  xmlns:vfs="class:/spiralcraft/vfs/"
+  >
+  <base>bundle://spiralcraft-webapp.war-webui/
+  </base>
+  
+  <logLevel>INFO
+  </logLevel>
+</vfs:Package>

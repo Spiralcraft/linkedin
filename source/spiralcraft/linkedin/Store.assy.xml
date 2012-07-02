@@ -1,0 +1,17 @@
+<data-xml:XmlStore
+  xmlns:data-xml="class:/spiralcraft/data/xml/"
+  xmlns:li="class:/spiralcraft/linkedin/"
+  >
+  <name>spiralcraft-linkedin
+  </name>
+  
+  <schema dataURI="li:LinkedIn.schema.xml"/>
+  
+  <debugLevel>INFO
+  </debugLevel>
+  
+  <historyRetention.maxCount>1
+  </historyRetention.maxCount>
+        
+  
+</data-xml:XmlStore>

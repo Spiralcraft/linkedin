@@ -1,0 +1,18 @@
+<base:PathContext
+  xmlns:base="context://package-base/"
+  xmlns:li="class:/spiralcraft/linkedin/"
+  xmlns:run="context://run/"
+  >
+  
+  <preFilters>
+    <li:Filter>
+      <client dataURI="run:LinkedIn.local.xml">
+      </client>
+    </li:Filter>
+  </preFilters>
+  
+  <placeContext.plugins>
+    <li:Plugin/>
+  </placeContext.plugins>
+
+</base:PathContext>
