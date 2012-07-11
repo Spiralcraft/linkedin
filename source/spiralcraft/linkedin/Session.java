@@ -16,6 +16,10 @@ package spiralcraft.linkedin;
 
 import java.io.IOException;
 
+import org.xml.sax.SAXException;
+
+import spiralcraft.sax.ParseTree;
+import spiralcraft.sax.ParseTreeFactory;
 import spiralcraft.util.URIUtil;
 import spiralcraft.vfs.url.URLMessage;
 
@@ -32,8 +36,31 @@ public class Session
     throws IOException
   { 
     URLMessage result
-      =call("GET",URIUtil.addPathSegment(client.getApiURI(),"people/~"),null);
-    log.fine(result.toString());
+      =call("GET",URIUtil.addPathSegment(client.getApiURI(),"people/~:(id)"),null);
+ 
+    if (logLevel.isFine())
+    { log.fine(result.toString());
+    }
+    try
+    {
+      ParseTree resultTree
+        =ParseTreeFactory.fromInputStream(result.getInputStream());
+      
+      if (logLevel.isFine())
+      { log.fine(""+resultTree.getDocument().getRootElement());
+      }
+      this.oauthId
+        =resultTree.getDocument()
+          .getRootElement()
+          .getChildByQName("id")
+          .getCharacters();
+      
+      
+    }
+    catch (SAXException x)
+    { throw new IOException("Error reading response",x);
+    }
+        
   }
   
 }

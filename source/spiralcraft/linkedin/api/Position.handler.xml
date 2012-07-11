@@ -1,0 +1,42 @@
+<li:TupleFrame
+  xmlns:sax="class:/spiralcraft/data/sax/"
+  xmlns:li="class:/spiralcraft/linkedin/api/"
+  >
+  <elementURI>position
+  </elementURI>
+  
+  <type><li:Position.type/>
+  </type>
+
+  <debug>true
+  </debug>
+  
+  <children>
+    <sax:ValueFrame>
+      <elementURI>id
+      </elementURI>
+      <assignment>id
+      </assignment>
+    </sax:ValueFrame>
+    
+    <sax:ValueFrame>
+      <elementURI>title
+      </elementURI>
+      <assignment>title
+      </assignment>
+    </sax:ValueFrame>
+    
+    <sax:ValueFrame>
+      <elementURI>summary
+      </elementURI>
+      <assignment>summary
+      </assignment>
+    </sax:ValueFrame>
+    
+    <li:TupleFrame ref="Company.handler.xml">
+      <assignment>company
+      </assignment>
+    </li:TupleFrame>
+
+  </children>
+</li:TupleFrame>

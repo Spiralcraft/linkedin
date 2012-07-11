@@ -1,0 +1,6 @@
+<sax:AggregateFrame
+  xmlns:sax="class:/spiralcraft/data/sax/"
+  >
+  <captureChildObject>true
+  </captureChildObject>
+</sax:AggregateFrame>

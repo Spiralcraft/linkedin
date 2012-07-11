@@ -11,7 +11,6 @@
           '
     %>
     <%Redirect
-      debug="true"
       locationX
         ='[li:Filter].startAuthSequence
             ([wui:ServiceContext].request.requestURL.toString())

@@ -1,0 +1,17 @@
+<li:AggregateFrame
+  xmlns:sax="class:/spiralcraft/data/sax/"
+  xmlns:li="class:/spiralcraft/linkedin/api/"
+  >
+  <elementURI>positions
+  </elementURI>
+  
+  <type><li:Position.list.type/>
+  </type>
+
+  <debug>true
+  </debug>
+  
+  <children>
+    <li:TupleFrame ref="li:Position.handler.xml"/>
+  </children>
+</li:AggregateFrame>

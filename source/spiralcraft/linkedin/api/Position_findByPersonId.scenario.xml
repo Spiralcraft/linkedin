@@ -1,0 +1,14 @@
+<li:Call
+  xmlns:li="class:/spiralcraft/linkedin/"
+  xmlns:j="class:/java/lang/"
+  xmlns:api="class:/spiralcraft/linkedin/api/"
+  >
+  <contextX>{ id:[@j:String] }
+  </contextX>
+  
+  <resultReflectorX>[@api:Position.list]
+  </resultReflectorX>
+  
+  <pathX>"people/"+id+"/positions:(id,title,summary,company:(id,name,type,size,industry,ticker))"
+  </pathX>
+</li:Call>

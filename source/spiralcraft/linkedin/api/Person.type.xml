@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<meta:Type 
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:api="class:/spiralcraft/linkedin/api/"
+  xmlns:vfsu="class:/spiralcraft/vfs/url/"
+  >
+  <fields>
+    <meta:Field>
+      <name>id</name>
+      <type>
+        <String.type/>
+      </type>
+    </meta:Field>
+    <meta:Field>
+      <name>firstName</name>
+      <type>
+        <String.type/>
+      </type>
+    </meta:Field>
+    <meta:Field>
+      <name>lastName</name>
+      <type>
+        <String.type/>
+      </type>
+    </meta:Field>
+    <meta:CalculatedField>
+      <name>positions
+      </name>
+      <type>
+        <api:Position.list.type/>
+      </type>
+      <expression>[@api:Position].@findByPersonId(id)
+      </expression>
+    </meta:CalculatedField>
+  </fields>
+  
+  <methods>
+    <meta:TaskMethod>
+      <name>findById</name>
+      
+      <static>true
+      </static>
+      
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      
+      <returnType>
+        <api:Person.type/>
+      </returnType>
+      
+
+          
+    </meta:TaskMethod> 
+
+    <meta:TaskMethod>
+      <name>me</name>
+      
+      <static>true
+      </static>
+      
+      <returnType>
+        <api:Person.type/>
+      </returnType>
+               
+    </meta:TaskMethod>
+
+
+<!-- 
+    <meta:TaskMethod>
+      <name>disconnect</name>
+      <returnType>
+        <Void.type/>
+      </returnType>
+      
+    </meta:TaskMethod>
+
+    <meta:TaskMethod>
+      <name>imageResource</name>
+      
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+
+      <returnType>
+        <vfsu:URLResource.type/>
+      </returnType>
+               
+    </meta:TaskMethod>     
+-->    
+  </methods> 
+</meta:Type>

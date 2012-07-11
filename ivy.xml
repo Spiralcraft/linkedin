@@ -4,6 +4,7 @@
   </info> 
 
   <configurations>
+    <conf name="default"/>
     <conf name="dev"/>
   
   </configurations>

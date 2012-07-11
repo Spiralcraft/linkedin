@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<meta:Type 
+  xmlns:meta="class:/spiralcraft/data/types/meta/"
+  xmlns:api="class:/spiralcraft/linkedin/api/"
+  >
+  <fields>
+    <meta:Field>
+      <name>id</name>
+      <type>
+        <String.type/>
+      </type>
+    </meta:Field>
+    <meta:Field>
+      <name>title</name>
+      <type>
+        <String.type/>
+      </type>
+    </meta:Field>
+    <meta:Field>
+      <name>summary</name>
+      <type>
+        <String.type/>
+      </type>
+    </meta:Field>
+    <meta:Field>
+      <name>company</name>
+      <type>
+        <api:Company.type/>
+      </type>
+    </meta:Field>
+  </fields>
+  
+  <methods>
+    <meta:TaskMethod>
+      <name>findByPersonId</name>
+      
+      <static>true
+      </static>
+      
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      
+      <returnType>
+        <api:Position.list.type/>
+      </returnType>
+      
+    </meta:TaskMethod> 
+
+  </methods> 
+</meta:Type>

@@ -1,0 +1,18 @@
+<li:Call
+  xmlns:li="class:/spiralcraft/linkedin/"
+  xmlns:j="class:/java/lang/"
+  xmlns:api="class:/spiralcraft/linkedin/api/"
+  >
+ 
+  <resultReflectorX>[@api:Person]
+  </resultReflectorX>
+  
+  <pathX>"people/~:(id,first-name,last-name)"
+  </pathX>
+  
+  <whenX>[li:Session].oauthId!=null
+  </whenX>
+  
+  <debug>false
+  </debug>
+</li:Call>
