@@ -1,0 +1,42 @@
+<%@doclet
+  tgns="class:/spiralcraft/servlet/webui/components/"
+  tgns:wui="class:/spiralcraft/servlet/webui/"
+  tgns:li="class:/spiralcraft/linkedin/"
+  tgns:jnet="class:/java/net/"
+  tgns:theme="context://theme/"
+  tgns:api="class:/spiralcraft/linkedin/api/"
+  tgns:liui="context://code/spiralcraft-linkedin/"
+  tgns:fn-login="context://code/function/login/"
+  tgns:fn-registration="context://code/function/registration/"
+  tgns:auth="class:/spiralcraft/security/auth/"
+  %>
+  <%theme:page%>
+    <%If x="[li:Session].tokenValid"%>
+      <%If x="[auth:AuthSession].authenticated"%>
+        <%Redirect 
+          locationX
+            ='@{[auth:AuthSession].associateLogin("linkedin")
+               ,"/spiralcraft-linkedin/me"
+             }'
+                     
+        /%>
+      <%Else/%>
+        <%DataSession%>
+          <div class="sc-linkedin-signIn-loginForm-container">
+            <%fn-login:loginForm/%>
+          </div>
+          <div class="sc-linkedin-signIn-registrationForm-container">
+            <%fn-registration:registrationForm/%>
+          </div>
+        <%/DataSession%>
+      <%/If%>
+    
+    
+    <%Else/%>
+      <%theme:taskPanel%>
+        <%liui:signInButton/%>
+      <%/theme:taskPanel%>
+    <%/If%>
+    
+  <%/theme:page%>
+<%/@doclet%>

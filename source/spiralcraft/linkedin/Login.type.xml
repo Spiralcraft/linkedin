@@ -4,8 +4,8 @@
   xmlns:oauth="class:/spiralcraft/oauth1/"
   >
 
-  <baseType>
+  <archetype>
     <oauth:Login.type/>
-  </baseType>
+  </archetype>
   
 </meta:Type>

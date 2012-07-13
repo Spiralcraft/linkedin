@@ -1,0 +1,7 @@
+<%@doclet
+  tgns:wui="class:/spiralcraft/servlet/webui/"
+  %>
+  <a href='/spiralcraft-linkedin/auth.webui?referer=<%=[wui:ServiceContext].dataEncodedAbsoluteBackLink/%>'>
+    <img src='/images/spiralcraft-linkedin/signin.png' width="142" height="32"/>
+  </a>
+<%/@doclet%>
