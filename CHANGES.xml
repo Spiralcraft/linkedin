@@ -26,14 +26,6 @@
         <path>package/war-webui/auth.webui
         </path>
         
-        <resources>
-          <URI>Client.java
-          </URI>
-          <URI>Scope.java
-          </URI>
-          <URI>StandardClient.assy.xml
-          </URI>
-        </resources>
       </scm:Change>
 
       <scm:Change>
