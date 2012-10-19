@@ -4,21 +4,27 @@
   tgns:li="class:/spiralcraft/linkedin/"
   tgns:jnet="class:/java/net/"
   %>
-  <%If x='[wui:ServiceContext].query
-            {.get("oauth_token")==null
-             || .get("oauth_verifier")==null
-            }
-          '
-    %>
+  <%If x='[wui:ServiceContext].query.get("oauth_problem")!=null'%>
     <%Redirect
-      locationX
-        ='[li:Filter].startAuthSequence
-            ([wui:ServiceContext].request.requestURL.toString())
-         '
+      locationX='[li:Filter].abortAuthSequence([wui:ServiceContext].query)'
     /%>
   <%Else/%>
-    <%Redirect
-      locationX="[li:Filter].readCallback([wui:ServiceContext].query)"
-    /%>
+    <%If x='[wui:ServiceContext].query
+              {.get("oauth_token")==null
+               || .get("oauth_verifier")==null
+              }
+            '
+      %>
+      <%Redirect
+        locationX
+          ='[li:Filter].startAuthSequence
+              ([wui:ServiceContext].request.requestURL.toString())
+           '
+      /%>
+    <%Else/%>
+      <%Redirect
+        locationX='[li:Filter].readCallback([wui:ServiceContext].query)'
+      /%>
+    <%/If%>
   <%/If%>
 <%/@doclet%>
