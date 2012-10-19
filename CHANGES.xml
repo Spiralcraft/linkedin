@@ -15,6 +15,28 @@
     <detail>
     
       <scm:Change>
+        <revision>-dev2
+        </revision>
+        
+        <notes>
+          <scm:Note>Added permission scopes to Client configuration
+          </scm:Note>
+        </notes>
+
+        <path>source/spiralcraft/linkedin
+        </path>
+        
+        <resources>
+          <URI>Client.java
+          </URI>
+          <URI>Scope.java
+          </URI>
+          <URI>StandardClient.assy.xml
+          </URI>
+        </resources>
+      </scm:Change>
+
+      <scm:Change>
         <revision>-dev1
         </revision>
         
