@@ -33,5 +33,11 @@
       </assignment>
     </sax:ValueFrame>
     
+    <sax:ValueFrame>
+      <elementURI>picture-url
+      </elementURI>
+      <assignment>pictureURL
+      </assignment>
+    </sax:ValueFrame>
   </children>
 </li:TupleFrame>

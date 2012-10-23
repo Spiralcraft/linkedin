@@ -4,6 +4,10 @@
   xmlns:meta="class:/spiralcraft/data/types/meta/"
   xmlns:api="class:/spiralcraft/linkedin/api/"
   xmlns:vfsu="class:/spiralcraft/vfs/url/"
+  xmlns:task="class:/spiralcraft/task/"
+  xmlns:vfsf="class:/spiralcraft/vfs/functions/"
+  xmlns:vfs="class:/spiralcraft/vfs/" 
+  xmlns:jnet="class:/java/net/"
   >
   <fields>
     <meta:Field>
@@ -22,6 +26,12 @@
       <name>lastName</name>
       <type>
         <String.type/>
+      </type>
+    </meta:Field>
+    <meta:Field>
+      <name>pictureURL</name>
+      <type>
+        <URI.type/>
       </type>
     </meta:Field>
     <meta:CalculatedField>
@@ -66,28 +76,56 @@
                
     </meta:TaskMethod>
 
-
-<!-- 
-    <meta:TaskMethod>
-      <name>disconnect</name>
-      <returnType>
-        <Void.type/>
-      </returnType>
-      
-    </meta:TaskMethod>
-
-    <meta:TaskMethod>
-      <name>imageResource</name>
-      
+    <meta:Method>
+      <name>copyPicture
+      </name>
+    
       <parameterTypes>
+        <URI.type/>
         <String.type/>
       </parameterTypes>
-
+    
       <returnType>
-        <vfsu:URLResource.type/>
+        <URI.type/>
       </returnType>
-               
-    </meta:TaskMethod>     
--->    
+      
+      <contextX>
+        [#copyPicture] 
+        { 
+          container:=[@jnet:URI].("context://files/")
+          ,prefix:="liUserPic" 
+        }      
+      </contextX>
+    
+      <x>
+      
+        [api:Person].pictureURL==null
+          ?null
+          : 
+            [@vfsu:URLResource].([api:Person].pictureURL).message
+            {
+              [copyPicture].container.[*vfsf:Resolve].URI
+                .relativize
+                  ([@vfs:ResourceUtil].@addCopy
+                    ([copyPicture].container
+                      .[*vfsf:Resolve].asContainer()
+                    ,.contentBody
+                    ,[copyPicture].prefix+[api:Person].id+
+                      (.metadata.getValue("Content-Type")
+                        {.=="image/jpeg"
+                          ?".jpg"
+                          :.=="image/gif"
+                          ?".gif"
+                          :""
+                        }
+                      )
+                    ).URI
+                  )
+      
+            }      
+      </x>
+    
+    </meta:Method>    
+
   </methods> 
 </meta:Type>
