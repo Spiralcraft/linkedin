@@ -1,11 +1,37 @@
 <meta:Type
   xmlns:meta="class:/spiralcraft/data/types/meta/"
   xmlns:sec="class:/spiralcraft/security/"
+  xmlns:li="class:/spiralcraft/linkedin/"
   xmlns:oauth="class:/spiralcraft/oauth1/"
+  xmlns:j="class:/java/lang/"
+  xmlns:dtask="class:/spiralcraft/data/task"
   >
 
   <archetype>
     <oauth:Login.type/>
   </archetype>
   
+  <methods>
+    <meta:Method>
+      <name>findByPrincipalId</name>
+      
+      <static>true
+      </static>
+      
+      <parameterTypes>
+        <String.type/>
+      </parameterTypes>
+      
+      <returnType>
+        <li:Login.type/>
+      </returnType>
+      
+      <contextX>{ id:[@j:String] }
+      </contextX>
+          
+      <x>[*dtask:Fetch{[@li:Login],[{`principalId:=id`}]}].()
+      </x>
+          
+    </meta:Method>  
+  </methods>  
 </meta:Type>
