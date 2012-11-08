@@ -15,6 +15,20 @@
     <detail>
     
       <scm:Change>
+        <revision>-dev4
+        </revision>
+        
+        <notes>
+          <scm:Note>Login.findByPrincipalId() static method
+          </scm:Note>
+        </notes>
+
+        <path>source/spiralcraft/linkedin/Login.type.xml
+        </path>
+        
+      </scm:Change>
+
+      <scm:Change>
         <revision>-dev3
         </revision>
         
