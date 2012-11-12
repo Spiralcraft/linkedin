@@ -7,9 +7,6 @@
   
   <type><li:Position.type/>
   </type>
-
-  <debug>true
-  </debug>
   
   <children>
     <sax:ValueFrame>

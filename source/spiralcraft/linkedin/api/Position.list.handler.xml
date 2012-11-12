@@ -7,9 +7,6 @@
   
   <type><li:Position.list.type/>
   </type>
-
-  <debug>true
-  </debug>
   
   <children>
     <li:TupleFrame ref="li:Position.handler.xml"/>
