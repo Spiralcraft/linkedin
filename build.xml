@@ -2,6 +2,7 @@
 
   <property name="module" value="linkedin"/>
   <property name="buildVersion" value="0.4.17-dev5"/>
+  <property name="build.status" value="milestone"/>
 
   <property name="publish.resolver.type" value="distrib"/>  
   
