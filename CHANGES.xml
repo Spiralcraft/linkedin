@@ -15,6 +15,31 @@
     <detail>
     
       <scm:Change>
+        <revision>-dev6
+        </revision>
+        
+        <notes>
+          <scm:Note>Pull email address into profile
+          </scm:Note>
+        </notes>
+
+        <path>
+        </path>
+        
+        <resources>
+          <URI>source/spiralcraft/linkedin/api/Person.type.xml
+          </URI>
+          <URI>source/spiralcraft/linkedin/api/Person.handler.xml
+          </URI>
+          <URI>source/spiralcraft/linkedin/api/Person_me.scenario.xml
+          </URI>
+          <URI>package/war-webui/me.webui
+          </URI>
+        </resources>
+        
+      </scm:Change>
+
+      <scm:Change>
         <revision>-dev5
         </revision>
         

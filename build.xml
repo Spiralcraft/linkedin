@@ -1,8 +1,8 @@
 <project name="spiralcraft-linkedin" default="pack" basedir=".">
 
   <property name="module" value="linkedin"/>
-  <property name="buildVersion" value="0.4.17-dev5"/>
-  <property name="build.status" value="milestone"/>
+  <property name="buildVersion" value="0.4.17-dev6"/>
+  <property name="build.status" value="integration"/>
 
   <property name="publish.resolver.type" value="distrib"/>  
   
