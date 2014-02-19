@@ -1,25 +1,23 @@
 <%@doclet
-  tgns="class:/spiralcraft/servlet/webui/components/"
+  tgns:comp="context://code/components/"
   tgns:wui="class:/spiralcraft/servlet/webui/"
   tgns:li="class:/spiralcraft/linkedin/"
   tgns:jnet="class:/java/net/"
   tgns:theme="context://theme/"
   tgns:api="class:/spiralcraft/linkedin/api/"
   %>
-  <%Redirect 
+  <%comp:Redirect 
     when="[li:Session].tokenValid!=true"
     locationX='"/spiralcraft-linkedin/auth?referer="+[wui:ServiceContext].dataEncodedAbsoluteBackLink'
     debug="false"
   /%>
-  <%theme:page%>
-    <%theme:taskPanel%>
+  <%theme:activity-page%>
       <pre>
       <%With x="[@api:Person].@me()"%>
         <%=.@tuple.toText("|")/%>
         <%=.positions.@aggregate.toText("|")/%>
       <%/With%>
       <pre>
-    <%/theme:taskPanel%>
     
-  <%/theme:page%>
+  <%/theme:activity-page%>
 <%/@doclet%>

@@ -7,7 +7,7 @@
   <resultReflectorX>[@api:Person]
   </resultReflectorX>
   
-  <pathX>"people/~:(id,first-name,last-name,picture-url)"
+  <pathX>"people/~:(id,first-name,last-name,picture-url,email-address)"
   </pathX>
   
   <whenX>[li:Session].oauthId!=null

@@ -39,5 +39,13 @@
       <assignment>pictureURL
       </assignment>
     </sax:ValueFrame>
+
+    <sax:ValueFrame>
+      <elementURI>email-address
+      </elementURI>
+      <assignment>emailAddress
+      </assignment>
+    </sax:ValueFrame>
+
   </children>
 </li:TupleFrame>
