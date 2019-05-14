@@ -1,10 +1,13 @@
 <project name="spiralcraft-linkedin" default="pack" basedir=".">
 
+  <property name="organization" value="spiralcraft"/>
   <property name="module" value="linkedin"/>
-  <property name="buildVersion" value="0.4.17-dev6"/>
-  <property name="build.status" value="milestone"/>
-
-  <property name="publish.resolver.type" value="distrib"/>  
+  <property file="version.properties"/>
+  
+  <property name="depends.dir" location="../../repo"/>
+  
+  <property name="spiralcraft.javac.target" value="1.8"/>
+  <property name="spiralcraft.javac.source" value="1.8"/>
   
   <path id="classpath">
     <pathelement location="lib/spiralcraft-core.jar"/>
@@ -21,6 +24,6 @@
   <property name="package.spiralcraft-webapp.dest" value="packages"/>
   <property name="package.spiralcraft-jsclient.dest" value="packages"/>
     
-  <import file="../../build/build-spiralcraft-common.xml"/>
+  <import file="../../build/build-common.xml"/>
        
 </project>

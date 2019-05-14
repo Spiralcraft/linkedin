@@ -15,6 +15,45 @@
     <detail>
     
       <scm:Change>
+        <revision>-dev7
+        </revision>
+        
+        <notes>
+          <scm:Note>Conversion to oauth2 and API v2
+          </scm:Note>
+        </notes>
+
+        <path>
+        </path>
+        
+        <resources>
+          <URI>source/spiralcraft/linkedin/Call.java
+          </URI>
+          <URI>source/spiralcraft/linkedin/Client.java
+          </URI>
+          <URI>source/spiralcraft/linkedin/Scope.java
+          </URI>
+          <URI>source/spiralcraft/linkedin/Session.java
+          </URI>
+          <URI>source/spiralcraft/linkedin/Filter.assy.xml
+          </URI>
+          <URI>source/spiralcraft/linkedin/StandardClient.assy.xml
+          </URI>
+          <URI>source/spiralcraft/linkedin/api/Person.type.xml
+          </URI>
+          <URI>source/spiralcraft/linkedin/api/Person.handler.xml
+          </URI>
+          <URI>source/spiralcraft/linkedin/api/Person_me.scenario.xml
+          </URI>
+          <URI>package/war-webui/auth.webui
+          </URI>
+          <URI>package/war-webui/me.webui
+          </URI>
+        </resources>
+        
+      </scm:Change>
+
+      <scm:Change>
         <revision>-dev6
         </revision>
         

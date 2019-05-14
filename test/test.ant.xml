@@ -13,7 +13,7 @@
   </target>
 
   <target name="httpd" description="test web app">
-     
+    <mkdir dir="log"/>
     <devgui
       codebase=".."
       launchArgs="--gui"
