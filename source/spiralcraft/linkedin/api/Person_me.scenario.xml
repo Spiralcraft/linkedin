@@ -7,7 +7,7 @@
   <resultReflectorX>[@api:Person]
   </resultReflectorX>
   
-  <pathX>"people/~:(id,first-name,last-name,picture-url,email-address)"
+  <pathX>"me?projection=(id,localizedFirstName,localizedLastName)"
   </pathX>
   
   <whenX>[li:Session].oauthId!=null
@@ -15,4 +15,9 @@
   
   <debug>false
   </debug>
+  
+  <JSONStruct>[#li] {id:[@j:String], localizedFirstName:[@j:String], localizedLastName:[@j:String] }
+  </JSONStruct>
+  <resultX>[@api:Person].(id:=[li].id, firstName:=[li].localizedFirstName, lastName:=[li].localizedLastName)
+  </resultX>
 </li:Call>

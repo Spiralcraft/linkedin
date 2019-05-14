@@ -18,31 +18,46 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 
-import org.xml.sax.SAXException;
-
 import spiralcraft.common.ContextualException;
+import spiralcraft.common.callable.BinaryFunction;
 import spiralcraft.data.DataComposite;
-import spiralcraft.data.DataException;
-import spiralcraft.data.Type;
-import spiralcraft.data.lang.DataReflector;
-import spiralcraft.data.persist.XmlBean;
-import spiralcraft.data.sax.DataReader;
-import spiralcraft.data.sax.FrameHandler;
-import spiralcraft.data.sax.RootFrame;
+import spiralcraft.json.FromJson;
+import spiralcraft.lang.Binding;
 import spiralcraft.lang.Focus;
+import spiralcraft.lang.parser.Struct;
 import spiralcraft.lang.reflect.BeanReflector;
-import spiralcraft.util.URIUtil;
+import spiralcraft.lang.spi.ThreadLocalChannel;
+import spiralcraft.text.ParseException;
+import spiralcraft.vfs.util.ByteArrayResource;
 
 public class Call<Tresult extends DataComposite>
-  extends spiralcraft.oauth1.Call<Tresult>
+  extends spiralcraft.oauth2.Call<Tresult>
 {
-  private Type<Tresult> resultType;
-  private DataReader resultReader;
+  private Binding<Tresult> resultX;
+  private Binding<Struct> jsonStruct;
+  private ThreadLocalChannel<Struct> jsonChannel;
+  private FromJson<Struct,byte[]> fromJson;
+  private BinaryFunction<byte[],Struct,Struct,ParseException> fromJsonFn;
+//  private DataReader resultReader;
   
   { 
     clientReflector=BeanReflector.getInstance(Client.class);
   }
   
+  
+  public void setJSONStruct(Binding<Struct> jsonStruct)
+  { this.jsonStruct=jsonStruct;
+  }
+  
+  /**
+   * The expression that maps the deserialized JSON result into the app specific
+   *   return type of this call.
+   *
+   * @param resultX
+   */
+  public void setResultX(Binding<Tresult> resultX)
+  { this.resultX=resultX;
+  }
   
   @Override
   protected Operation resolveOperation(OperationType type)
@@ -51,6 +66,8 @@ public class Call<Tresult extends DataComposite>
     {
       case GET:
         return new LIReadOperation();
+      case PUT:
+      case DELETE:
     }
     return super.resolveOperation(type);
 
@@ -61,25 +78,38 @@ public class Call<Tresult extends DataComposite>
     throws ContextualException
   {
     chain=super.bindExports(chain);
-    resultType=((DataReflector<Tresult>) resultReflector).getType();
-    resultReader=new DataReader();
+    if (jsonStruct==null)
+    { throw new ContextualException("Property 'JSONStruct' required",getDeclarationInfo());
+    }
+    jsonStruct.bind(chain);
+    fromJson=new FromJson<Struct,byte[]>(jsonStruct.get());
+    fromJsonFn=fromJson.getBinaryFn();
+    jsonChannel=new ThreadLocalChannel<Struct>(jsonStruct.getReflector());
+    chain=chain.chain(jsonChannel);
+    if (resultX==null)
+    { throw new ContextualException("Property 'resultX' required",getDeclarationInfo());
+    }
+    resultX.bind(chain);
     
-    FrameHandler handler
-      =XmlBean.<FrameHandler>instantiate
-        (URI.create
-          ("class:/spiralcraft/linkedin/api/"
-          +URIUtil.unencodedLocalName(resultType.getURI())
-          +".handler.xml"
-          )
-        ).get();
-    
-    RootFrame<Tresult> rootHandler
-      =new RootFrame<Tresult>();
-    rootHandler.setChildren(new FrameHandler[] {handler});
-    rootHandler.setCaptureChildObject(true);
-    rootHandler.bind();
-//    rootHandler.setDebug(true);
-    resultReader.setFrameHandler(rootHandler);
+    // OBSOLETE - READ NEW MODEL IN JSON
+//    resultReader=new DataReader();
+//    
+//    FrameHandler handler
+//      =XmlBean.<FrameHandler>instantiate
+//        (URI.create
+//          ("class:/spiralcraft/linkedin/api/"
+//          +URIUtil.unencodedLocalName(resultType.getURI())
+//          +".handler.xml"
+//          )
+//        ).get();
+//    
+//    RootFrame<Tresult> rootHandler
+//      =new RootFrame<Tresult>();
+//    rootHandler.setChildren(new FrameHandler[] {handler});
+//    rootHandler.setCaptureChildObject(true);
+//    rootHandler.bind();
+////    rootHandler.setDebug(true);
+//    resultReader.setFrameHandler(rootHandler);
     return chain;
   }
   
@@ -93,18 +123,39 @@ public class Call<Tresult extends DataComposite>
     {      
       try
       {
-        Tresult result
-          =(Tresult) resultReader.readFromInputStream
-            (in,((DataReflector<Tresult>) resultReflector).getType(),uri);
-        
-        return result;
+        ByteArrayResource bytes=ByteArrayResource.copyOf(in);
+        Struct struct=fromJsonFn.evaluate(bytes.getBackingStore(),jsonStruct.get());
+        try
+        { 
+          jsonChannel.push(struct);
+          return resultX.get();
+        }
+        finally
+        { jsonChannel.pop();
+        }
       }
-      catch (DataException x)
+      catch (ParseException x)
       { throw new IOException("Error reading result",x);
       }
-      catch (SAXException x)
-      { throw new IOException("Error reading result",x);
-      }
+      finally
+      { }
+
+//   // XXX Use JSON
+//      try
+//      {
+//        
+//        Tresult result
+//          =(Tresult) resultReader.readFromInputStream
+//            (in,((DataReflector<Tresult>) resultReflector).getType(),uri);
+//        
+//        return result;
+//      }
+//      catch (DataException x)
+//      { throw new IOException("Error reading result",x);
+//      }
+//      catch (SAXException x)
+//      { throw new IOException("Error reading result",x);
+//      }
     }
     
   }  

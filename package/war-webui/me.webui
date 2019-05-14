@@ -15,7 +15,9 @@
       <pre>
       <%With x="[@api:Person].@me()"%>
         <%=.@tuple.toText("|")/%>
+        <%!%>
         <%=.positions.@aggregate.toText("|")/%>
+        <%/!%>
       <%/With%>
       <pre>
     

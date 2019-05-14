@@ -20,7 +20,7 @@ import spiralcraft.lang.reflect.BeanReflector;
 import spiralcraft.util.URIUtil;
 
 public class Client
-  extends spiralcraft.oauth1.Client
+  extends spiralcraft.oauth2.Client
 { 
 
   private URI credentialRequestURIBase;

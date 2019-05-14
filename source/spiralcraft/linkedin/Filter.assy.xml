@@ -1,5 +1,5 @@
-<oauth1:Filter
-  xmlns:oauth1="class:/spiralcraft/oauth1/"
+<oauth2:Filter
+  xmlns:oauth2="class:/spiralcraft/oauth2/"
   xmlns:li="class:/spiralcraft/linkedin/"
   >
-</oauth1:Filter>
+</oauth2:Filter>

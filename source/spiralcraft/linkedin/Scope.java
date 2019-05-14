@@ -3,6 +3,7 @@ package spiralcraft.linkedin;
 public enum Scope
 {
   BASIC_PROFILE("r_basicprofile")
+  ,LITE_PROFILE("r_liteprofile")
   ,FULL_PROFILE("r_fullprofile")
   ,EMAIL_ADDRESS("r_emailaddress")
   ,NETWORK("r_network")

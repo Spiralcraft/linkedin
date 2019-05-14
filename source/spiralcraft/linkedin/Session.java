@@ -15,18 +15,24 @@
 package spiralcraft.linkedin;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.xml.sax.SAXException;
 
-import spiralcraft.sax.ParseTree;
-import spiralcraft.sax.ParseTreeFactory;
+import spiralcraft.json.FromJson;
+import spiralcraft.lang.Channel;
+import spiralcraft.lang.Expression;
+import spiralcraft.lang.parser.Struct;
 import spiralcraft.util.URIUtil;
-import spiralcraft.vfs.url.URLMessage;
+import spiralcraft.vfs.util.ByteArrayResource;
 
 public class Session
-  extends spiralcraft.oauth1.Session
+  extends spiralcraft.oauth2.Session
 {
-
+  @SuppressWarnings("unchecked")
+  private static final 
+     Channel<Struct> idStruct = (Channel) Expression.bindStatic("{ id:=\"\" }");
+  
   public Session(Client client)
   { super(client);
   }
@@ -35,29 +41,49 @@ public class Session
   protected void postAuthenticate()
     throws IOException
   { 
-    URLMessage result
-      =call("GET",URIUtil.addPathSegment(client.getApiURI(),"people/~:(id)"),null);
+    log.fine("Calling "+URIUtil.addPathSegment(client.getApiURI(),"me"));
+    InputStream result
+      =call("GET",URIUtil.addPathSegment(client.getApiURI(),"me"),null);
  
-    if (logLevel.isFine())
-    { log.fine(result.toString());
+    if (true || logLevel.isFine())
+    { log.fine("Got result from ID call");
     }
     try
     {
-      ParseTree resultTree
-        =ParseTreeFactory.fromInputStream(result.getInputStream());
-      
-      if (logLevel.isFine())
-      { log.fine(""+resultTree.getDocument().getRootElement());
+      ByteArrayResource resource=ByteArrayResource.copyOf(result);
+      log.fine(resource.asString());
+      FromJson<Struct,String> fromJson=new FromJson<Struct,String>(idStruct.get());
+      fromJson.setIgnoreUnrecognizedFields(true);
+      Struct idStruct=fromJson.getStringFn().evaluate(resource.asString(),null);
+      log.fine(idStruct.toString());
+      this.oauthId=(String) idStruct.getValue("id");
+      log.fine("Got id: "+oauthId);
+      /*
+      <!-- 
+      {"localizedLastName":"Toth"
+      ,"lastName":{"localized":{"en_US":"Toth"},"preferredLocale":{"country":"US","language":"en"}}
+      ,"firstName":{"localized":{"en_US":"Michael"},"preferredLocale":{"country":"US","language":"en"}}
+      ,"profilePicture":{"displayImage":"urn:li:digitalmediaAsset:C4E03AQGlrnUjcGhPvA"}
+      ,"id":"31qa2B4abO"
+      ,"localizedFirstName":"Michael"
       }
-      this.oauthId
-        =resultTree.getDocument()
-          .getRootElement()
-          .getChildByQName("id")
-          .getCharacters();
+      -->
+      */
+//      ParseTree resultTree
+//        =ParseTreeFactory.fromInputStream(result);
+//      
+//      if (logLevel.isFine())
+//      { log.fine(""+resultTree.getDocument().getRootElement());
+//      }
+//      this.oauthId
+//        =resultTree.getDocument()
+//          .getRootElement()
+//          .getChildByQName("id")
+//          .getCharacters();
       
       
     }
-    catch (SAXException x)
+    catch (Exception x)
     { throw new IOException("Error reading response",x);
     }
         

@@ -4,14 +4,14 @@
   tgns:li="class:/spiralcraft/linkedin/"
   tgns:jnet="class:/java/net/"
   %>
-  <%If x='[wui:ServiceContext].query.get("oauth_problem")!=null'%>
+  <%If x='[wui:ServiceContext].query.get("error")!=null'%>
     <%Redirect
       locationX='[li:Filter].abortAuthSequence([wui:ServiceContext].query)'
     /%>
   <%Else/%>
     <%If x='[wui:ServiceContext].query
-              {.get("oauth_token")==null
-               || .get("oauth_verifier")==null
+              {.get("code")==null
+               || .get("state")==null
               }
             '
       %>

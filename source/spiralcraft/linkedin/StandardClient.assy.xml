@@ -1,19 +1,19 @@
 <li:Client
   xmlns:li="class:/spiralcraft/linkedin/">
 
-  <credentialRequestURIBase>https://api.linkedin.com/uas/oauth/requestToken
+  <credentialRequestURIBase>https://www.linkedin.com/oauth/v2/authorization
   </credentialRequestURIBase>
   
   <authorizationURI>https://www.linkedin.com/uas/oauth/authenticate
   </authorizationURI>
   
-  <tokenRequestURI>https://www.linkedin.com/uas/oauth/accessToken
+  <tokenRequestURI>https://www.linkedin.com/oauth/v2/accessToken
   </tokenRequestURI>
   
   <tokenInvalidateURI>https://api.linkedin.com/uas/oauth/invalidateToken
   </tokenInvalidateURI>
   
-  <apiURI>https://api.linkedin.com/v1
+  <apiURI>https://api.linkedin.com/v2
   </apiURI>
 
 </li:Client>
