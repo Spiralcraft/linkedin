@@ -30,7 +30,7 @@ import spiralcraft.lang.spi.ThreadLocalChannel;
 import spiralcraft.text.ParseException;
 import spiralcraft.vfs.util.ByteArrayResource;
 
-public class Call<Tresult extends DataComposite>
+public class Call<Tresult>
   extends spiralcraft.oauth2.Call<Tresult>
 {
   private Binding<Tresult> resultX;
@@ -38,12 +38,16 @@ public class Call<Tresult extends DataComposite>
   private ThreadLocalChannel<Struct> jsonChannel;
   private FromJson<Struct,byte[]> fromJson;
   private BinaryFunction<byte[],Struct,Struct,ParseException> fromJsonFn;
+  private boolean ignoreUnrecognizedFields=false;
 //  private DataReader resultReader;
   
   { 
     clientReflector=BeanReflector.getInstance(Client.class);
   }
   
+  public void setIgnoreUnrecognizedFields(boolean ignoreUnrecognizedFields)
+  { this.ignoreUnrecognizedFields=ignoreUnrecognizedFields;
+  }
   
   public void setJSONStruct(Binding<Struct> jsonStruct)
   { this.jsonStruct=jsonStruct;
@@ -83,6 +87,7 @@ public class Call<Tresult extends DataComposite>
     }
     jsonStruct.bind(chain);
     fromJson=new FromJson<Struct,byte[]>(jsonStruct.get());
+    fromJson.setIgnoreUnrecognizedFields(ignoreUnrecognizedFields);
     fromJsonFn=fromJson.getBinaryFn();
     jsonChannel=new ThreadLocalChannel<Struct>(jsonStruct.getReflector());
     chain=chain.chain(jsonChannel);
