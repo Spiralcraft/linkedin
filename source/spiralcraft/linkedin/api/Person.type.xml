@@ -83,7 +83,19 @@
       </returnType>
                
     </meta:TaskMethod>
-
+    
+    <meta:TaskMethod>
+      <name>myEmail</name>
+      
+      <static>true
+      </static>
+      
+      <returnType>
+        <String.type/>
+      </returnType>
+               
+    </meta:TaskMethod>
+    
     <meta:Method>
       <name>copyPicture
       </name>

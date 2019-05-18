@@ -9,6 +9,12 @@
   <resultReflectorX>[@api:Position.list]
   </resultReflectorX>
   
-  <pathX>"people/"+id+"/positions:(id,title,summary,company:(id,name,type,size,industry,ticker))"
+  <JSONStruct>[#json] { positions:= [{ { positionId:[@j:String]} }] }
+  </JSONStruct>
+  
+  <resultX>[json]
+  </resultX>
+  
+  <pathX>"people/id="+id+"/positions"
   </pathX>
 </li:Call>

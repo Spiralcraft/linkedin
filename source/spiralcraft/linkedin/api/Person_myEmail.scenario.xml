@@ -1,0 +1,38 @@
+<li:Call
+  xmlns:li="class:/spiralcraft/linkedin/"
+  xmlns:j="class:/java/lang/"
+  xmlns:api="class:/spiralcraft/linkedin/api/"
+  xmlns:jnet="class:/java/net/"
+  >
+ 
+  <resultReflectorX>[@j:String]
+  </resultReflectorX>
+  
+  <pathX>"clientAwareMemberHandles?q=members&amp;projection=(elements*(primary,type,handle~))"
+  </pathX>
+  
+  <whenX>[li:Session].oauthId!=null
+  </whenX>
+  
+  <debug>false
+  </debug>
+  
+  <ignoreUnrecognizedFields>true
+  </ignoreUnrecognizedFields>
+  <JSONStruct>[#li] 
+    { elements:=
+          [{ 
+           { 
+             handle:[@j:String]
+             ,handle_:=
+              { emailAddress:[@j:String]
+              }
+           } 
+          }]
+   
+    }
+  </JSONStruct>
+  <resultX>
+    [li].elements[.handle_.emailAddress!=null][0].handle_.emailAddress
+  </resultX>
+</li:Call>

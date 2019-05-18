@@ -2,12 +2,13 @@
   xmlns:li="class:/spiralcraft/linkedin/"
   xmlns:j="class:/java/lang/"
   xmlns:api="class:/spiralcraft/linkedin/api/"
+  xmlns:jnet="class:/java/net/"
   >
  
   <resultReflectorX>[@api:Person]
   </resultReflectorX>
   
-  <pathX>"me?projection=(id,localizedFirstName,localizedLastName)"
+  <pathX>"me?projection=(id,localizedFirstName,localizedLastName,profilePicture(displayImage~:playableStreams))"
   </pathX>
   
   <whenX>[li:Session].oauthId!=null
@@ -16,8 +17,35 @@
   <debug>false
   </debug>
   
-  <JSONStruct>[#li] {id:[@j:String], localizedFirstName:[@j:String], localizedLastName:[@j:String] }
+  <ignoreUnrecognizedFields>true
+  </ignoreUnrecognizedFields>
+  <JSONStruct>[#li] 
+    {id:[@j:String]
+    , localizedFirstName:[@j:String]
+    , localizedLastName:[@j:String] 
+    , profilePicture:=
+      { displayImage:[@j:String]
+      , displayImage_:=
+        {
+          elements:=
+            [{ 
+             { identifiers:=
+               [{
+                { identifier:[@j:String]
+                }
+               }]
+             } 
+            }]
+        }
+      }
+    }
   </JSONStruct>
-  <resultX>[@api:Person].(id:=[li].id, firstName:=[li].localizedFirstName, lastName:=[li].localizedLastName)
+  <resultX>[@api:Person].
+    (id:=[li].id
+    , firstName:=[li].localizedFirstName
+    , lastName:=[li].localizedLastName
+    , pictureURL:=[@jnet:URI].@create([li].profilePicture.displayImage_.elements[0].identifiers[0].identifier)
+    , emailAddress:=[@api:Person].@myEmail()
+    )
   </resultX>
 </li:Call>
