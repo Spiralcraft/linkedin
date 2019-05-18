@@ -19,7 +19,7 @@
         <%=.positions.@aggregate.toText("|")/%>
         <%/!%>
       <%/With%>
-      <pre>
+      </pre>
     
   <%/theme:activity-page%>
 <%/@doclet%>
