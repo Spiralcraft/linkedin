@@ -17,8 +17,6 @@ package spiralcraft.linkedin;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.xml.sax.SAXException;
-
 import spiralcraft.json.FromJson;
 import spiralcraft.lang.Channel;
 import spiralcraft.lang.Expression;
@@ -29,7 +27,7 @@ import spiralcraft.vfs.util.ByteArrayResource;
 public class Session
   extends spiralcraft.oauth2.Session
 {
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({"unchecked","rawtypes"})
   private static final 
      Channel<Struct> idStruct = (Channel) Expression.bindStatic("{ id:=\"\" }");
   
@@ -45,7 +43,7 @@ public class Session
     InputStream result
       =call("GET",URIUtil.addPathSegment(client.getApiURI(),"me"),null);
  
-    if (true || logLevel.isFine())
+    if (logLevel.isFine())
     { log.fine("Got result from ID call");
     }
     try
